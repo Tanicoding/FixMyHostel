@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixMyHostel - Dashboard</title>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #F2F5F1;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background-color: #556B2F;
+      color: #fff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .navbar .nav-links a {
+      font-weight: 500;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #C3D6A5;
+      transform: translateY(-2px);
+    }
+
+    .navbar .login-btn {
+      padding: 0.5rem 1.2rem;
+      background-color: #C3D6A5;
+      color: #333;
+      border-radius: 5px;
+      font-weight: 500;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .navbar .login-btn:hover {
+      background-color: #A9C77B;
+      transform: translateY(-2px);
+    }
+
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .welcome {
+      margin-bottom: 2rem;
+      color: #556B2F;
+    }
+
+    .welcome h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome p {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* Stats Cards */
+    .stats-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      color: #556B2F;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #4B5320;
+    }
+
+    /* Recent Complaints Table */
+    .complaint-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.05);
+    }
+
+    .complaint-table th,
+    .complaint-table td {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .complaint-table th {
+      background-color: #556B2F;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .complaint-table tr:nth-child(even) {
+      background-color: #F2F5F1;
+    }
+
+    .status-pending { color: #FFA500; font-weight: 600; }
+    .status-resolved { color: #4B8B00; font-weight: 600; }
+    .status-inprogress { color: #1E90FF; font-weight: 600; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 2rem;
+      }
+      .navbar .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .complaint-table th, .complaint-table td {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">FixMyHostel</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#" class="active">Dashboard</a>
+      <a href="complaint.html">Complaint</a>
+      <a href="status.html">Status</a>
+      <a href="#" class="login-btn">Logout</a>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <!-- Welcome -->
+    <div class="welcome">
+      <h2>Welcome, John Doe!</h2>
+      <p>Here’s a quick overview of your hostel complaints and status updates.</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-cards">
+      <div class="card">
+        <h3>5</h3>
+        <p>Total Complaints</p>
+      </div>
+      <div class="card">
+        <h3>2</h3>
+        <p>Pending</p>
+      </div>
+      <div class="card">
+        <h3>2</h3>
+        <p>In Progress</p>
+      </div>
+      <div class="card">
+        <h3>1</h3>
+        <p>Resolved</p>
+      </div>
+    </div>
+
+    <!-- Recent Complaints -->
+    <h3 style="color:#556B2F; margin-bottom:1rem;">Recent Complaints</h3>
+    <table class="complaint-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Date Submitted</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Leaky Faucet</td>
+          <td>Maintenance</td>
+          <td>22 Oct 2025</td>
+          <td class="status-inprogress">In Progress</td>
+        </tr>
+        <tr>
+          <td>Room Heater Not Working</td>
+          <td>Room Issue</td>
+          <td>20 Oct 2025</td>
+          <td class="status-pending">Pending</td>
+        </tr>
+        <tr>
+          <td>Mess Food Quality</td>
+          <td>Mess / Food</td>
+          <td>18 Oct 2025</td>
+          <td class="status-resolved">Resolved</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+
