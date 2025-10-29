@@ -58,6 +58,14 @@
       </div>
     </div>
   </div>
+  <script>
+document.querySelector('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  alert('✅ Complaint submitted successfully!');
+  this.reset();
+});
+</script>
+
 </body>
 </html>
 
