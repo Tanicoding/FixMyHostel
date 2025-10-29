@@ -4,105 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FixMyHostel - Submit Complaint</title>
-  <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
-
-    body { background-color:#F2F5F1; color:#333; min-height:100vh; }
-
-    a { text-decoration:none; color:inherit; }
-
-    button { cursor:pointer; }
-
-    /* Navbar */
-    .navbar {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:1rem 3rem; background-color:#556B2F; color:#fff;
-      box-shadow:0 4px 6px rgba(0,0,0,0.1); position:sticky; top:0; z-index:100;
-    }
-
-    .navbar .logo { font-size:1.8rem; font-weight:700; letter-spacing:1px; }
-
-    .navbar .nav-links { display:flex; gap:1.5rem; align-items:center; }
-
-    .navbar .nav-links a { font-weight:500; transition: color 0.3s, transform 0.3s; }
-
-    .navbar .nav-links a:hover { color:#C3D6A5; transform:translateY(-2px); }
-
-    .navbar .login-btn { padding:0.5rem 1.2rem; background-color:#C3D6A5; color:#333; border-radius:5px; font-weight:500; transition: background 0.3s, transform 0.3s; }
-    .navbar .login-btn:hover { background-color:#A9C77B; transform:translateY(-2px); }
-
-    /* Container */
-    .container {
-      max-width: 1200px; margin:3rem auto; padding:0 2rem;
-      display:grid; grid-template-columns:1fr 1fr; gap:2rem;
-    }
-
-    /* Complaint Form */
-    .complaint-form {
-      background-color:#fff; padding:2rem; border-radius:10px;
-      box-shadow:0 6px 12px rgba(0,0,0,0.06);
-    }
-
-    .complaint-form h3 { color:#556B2F; margin-bottom:1rem; font-weight:600; }
-
-    .complaint-form input,
-    .complaint-form textarea,
-    .complaint-form select {
-      width:100%; padding:0.8rem 1rem; margin-bottom:1rem;
-      border:1px solid #C3D6A5; border-radius:6px; font-size:1rem;
-      transition:border 0.3s;
-    }
-
-    .complaint-form input:focus,
-    .complaint-form textarea:focus,
-    .complaint-form select:focus { border-color:#556B2F; outline:none; }
-
-    .complaint-form button {
-      padding:0.8rem 2rem; background-color:#556B2F; color:#fff;
-      border:none; border-radius:6px; font-weight:600; transition: background 0.3s, transform 0.3s;
-    }
-
-    .complaint-form button:hover { background-color:#6B8E23; transform:scale(1.05); }
-
-    /* Recent Complaints */
-    .recent-complaints h3 { color:#556B2F; margin-bottom:1rem; font-weight:600; }
-    .complaint-card {
-      background-color:#fff; padding:1rem 1.5rem; border-radius:10px;
-      box-shadow:0 4px 8px rgba(0,0,0,0.05); margin-bottom:1rem;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .complaint-card:hover { transform:translateY(-3px); box-shadow:0 8px 12px rgba(0,0,0,0.1); }
-
-    .complaint-card h4 { color:#556B2F; font-size:1.1rem; margin-bottom:0.5rem; }
-    .complaint-card p { font-size:0.95rem; color:#4B5320; margin-bottom:0.3rem; }
-    .status { font-weight:600; }
-    .status-pending { color:#FFA500; }
-    .status-inprogress { color:#1E90FF; }
-    .status-resolved { color:#4B8B00; }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .container { grid-template-columns:1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">FixMyHostel</div>
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="index.html" >Home</a>
       <a href="dashboard.html">Dashboard</a>
       <a href="complaint.html" class="active">Complaint</a>
-      <a href="status.html">Status</a>
-      <a href="#" class="login-btn">Logout</a>
+      <a href="status.html" >Status</a>
+      <a href="login.html" class="login-btn">Logout</a>
     </div>
   </nav>
 
   <div class="container">
-    <!-- Complaint Form -->
     <div class="complaint-form">
       <h3>Submit a Complaint</h3>
       <form>
@@ -119,7 +36,6 @@
       </form>
     </div>
 
-    <!-- Recent Complaints -->
     <div class="recent-complaints">
       <h3>Recent Complaints</h3>
       <div class="complaint-card">

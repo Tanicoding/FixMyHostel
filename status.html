@@ -4,156 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FixMyHostel - Status</title>
-  <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background-color: #F2F5F1;
-      color: #333;
-      min-height: 100vh;
-    }
-
-    a { text-decoration: none; color: inherit; }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 3rem;
-      background-color: #556B2F;
-      color: #fff;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .navbar .logo { font-size: 1.8rem; font-weight: 700; letter-spacing: 1px; }
-
-    .navbar .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    .navbar .nav-links a {
-      font-weight: 500;
-      transition: color 0.3s, transform 0.3s;
-    }
-
-    .navbar .nav-links a:hover { color: #C3D6A5; transform: translateY(-2px); }
-
-    .navbar .login-btn {
-      padding: 0.5rem 1.2rem;
-      background-color: #C3D6A5;
-      color: #333;
-      border-radius: 5px;
-      font-weight: 500;
-      transition: background 0.3s, transform 0.3s;
-    }
-
-    .navbar .login-btn:hover {
-      background-color: #A9C77B;
-      transform: translateY(-2px);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 3rem auto;
-      padding: 0 2rem;
-    }
-
-    .page-title {
-      color: #556B2F;
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    /* Filter Buttons */
-    .filters {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .filters button {
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 6px;
-      background-color: #C3D6A5;
-      color: #333;
-      font-weight: 500;
-      transition: background 0.3s, transform 0.3s;
-      cursor: pointer;
-    }
-
-    .filters button:hover {
-      background-color: #A9C77B;
-      transform: scale(1.05);
-    }
-
-    /* Status Table */
-    .complaint-table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 6px 10px rgba(0,0,0,0.05);
-    }
-
-    .complaint-table th,
-    .complaint-table td { padding: 1rem; text-align: left; }
-
-    .complaint-table th {
-      background-color: #556B2F;
-      color: #fff;
-      font-weight: 600;
-    }
-
-    .complaint-table tr:nth-child(even) { background-color: #F2F5F1; }
-
-    .status-pending { color: #FFA500; font-weight: 600; }
-    .status-resolved { color: #4B8B00; font-weight: 600; }
-    .status-inprogress { color: #1E90FF; font-weight: 600; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .navbar { flex-direction: column; gap: 1rem; padding: 1rem 2rem; }
-      .navbar .nav-links { flex-direction: column; gap: 1rem; }
-      .complaint-table th, .complaint-table td { font-size: 0.9rem; padding: 0.6rem; }
-      .filters button { font-size: 0.9rem; padding: 0.5rem 1rem; }
-    }
-  </style>
+ <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">FixMyHostel</div>
     <div class="nav-links">
-      <a href="index.html">Home</a>
+      <a href="index.html" >Home</a>
       <a href="dashboard.html">Dashboard</a>
       <a href="complaint.html">Complaint</a>
-      <a href="#" class="active">Status</a>
-      <a href="#" class="login-btn">Logout</a>
+      <a href="status.html" class="active">Status</a>
+      <a href="login.html" class="login-btn">Logout</a>
     </div>
   </nav>
 
   <div class="container">
     <div class="page-title">Complaint Status</div>
-
-    <!-- Filter Buttons -->
     <div class="filters">
       <button onclick="filterStatus('all')">All</button>
       <button onclick="filterStatus('pending')">Pending</button>
@@ -161,7 +28,6 @@
       <button onclick="filterStatus('resolved')">Resolved</button>
     </div>
 
-    <!-- Complaint Table -->
     <table class="complaint-table" id="statusTable">
       <thead>
         <tr>
