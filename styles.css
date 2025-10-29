@@ -954,3 +954,55 @@ button {
   }
 }
 
+/* Complaint Info Section */
+.complaint-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 4rem 10%;
+  background: #F7F9F5;
+  gap: 2rem;
+}
+
+.info-content h2 {
+  font-size: 2rem;
+  color: #3F5320;
+  margin-bottom: 1rem;
+}
+
+.info-content p {
+  color: #444;
+  font-size: 1.05rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.benefits {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits li {
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+  color: #4B5320;
+}
+
+.info-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* Responsive tweak */
+@media (max-width: 900px) {
+  .complaint-info {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .info-image img {
+    margin: 1.5rem auto 0;
+  }
+}

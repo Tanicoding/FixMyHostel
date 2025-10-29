@@ -3,22 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FixMyHostel - Submit Complaint</title>
+  <title>FixMyHostel - Complaint Management</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">FixMyHostel</div>
     <div class="nav-links">
-      <a href="index.html" >Home</a>
+      <a href="index.html">Home</a>
       <a href="dashb.html">Dashboard</a>
       <a href="comp.html" class="active">Complaint</a>
-      <a href="status.html" >Status</a>
+      <a href="status.html">Status</a>
       <a href="login.html" class="login-btn">Logout</a>
     </div>
   </nav>
 
+  <!-- Complaint Management Overview Section -->
+  <section class="complaint-info">
+    <div class="info-content">
+      <h2>Smart Complaint Management for Your Hostel</h2>
+      <p>
+        FixMyHostel’s Complaint Management System helps hostel residents raise, monitor, 
+        and resolve issues efficiently. It ensures transparent communication between students 
+        and the administration for a better hostel experience.
+      </p>
+      <ul class="benefits">
+        <li>✅ Quick and simple complaint submission</li>
+        <li>⚙️ Category-based sorting for faster handling</li>
+        <li>📊 Real-time tracking and status updates</li>
+        <li>🔔 Automated reminders and notifications</li>
+      </ul>
+    </div>
+    <div class="info-image">
+      <img src="images/complaint-dashboard.png" alt="Complaint Management Dashboard">
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <h3>1. Submit Complaint</h3>
+        <p>Students fill out a simple form describing their issue and select a category like Maintenance or Food.</p>
+      </div>
+      <div class="step-card">
+        <h3>2. Admin Review</h3>
+        <p>The hostel admin reviews the complaint, assigns it to the concerned department, and updates its status.</p>
+      </div>
+      <div class="step-card">
+        <h3>3. Resolution & Feedback</h3>
+        <p>Once resolved, students are notified and can provide feedback to help improve hostel services.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complaint Submission + Recent Complaints -->
   <div class="container">
     <div class="complaint-form">
       <h3>Submit a Complaint</h3>
@@ -58,24 +101,28 @@
       </div>
     </div>
   </div>
-<footer>
-  <div class="footer-inline">
-    <p>© 2025 FixMyHostel — Making Hostels Smarter 🌿</p>
-    <p>Made with ❤️ by <strong>Team OnlyCodes</strong></p>
-    <p>Contact Us: 
-      <a href="mailto:contact@fixmyhostel.com">contact@fixmyhostel.com</a> | 
-      <a href="tel:+919876543210">+91 98765 43210</a>
-    </p>
-  </div>
-</footer>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inline">
+      <p>© 2025 FixMyHostel — Making Hostels Smarter 🌿</p>
+      <p>Made with ❤️ by <strong>Team OnlyCodes</strong></p>
+      <p>Contact Us: 
+        <a href="mailto:contact@fixmyhostel.com">contact@fixmyhostel.com</a> | 
+        <a href="tel:+919876543210">+91 98765 43210</a>
+      </p>
+    </div>
+  </footer>
+
   <script>
-document.querySelector('form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  alert('✅ Complaint submitted successfully!');
-  this.reset();
-});
-</script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('✅ Complaint submitted successfully!');
+      this.reset();
+    });
+  </script>
 
 </body>
 </html>
+
 
