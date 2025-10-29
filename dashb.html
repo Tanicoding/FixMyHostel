@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FixMyHostel - Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
   <nav class="navbar">
     <div class="logo">FixMyHostel</div>
     <div class="nav-links">
-      <a href="index.html" >Home</a>
+      <a href="index.html">Home</a>
       <a href="dashb.html" class="active">Dashboard</a>
       <a href="comp.html">Complaint</a>
-      <a href="status.html" >Status</a>
+      <a href="status.html">Status</a>
       <a href="login.html" class="login-btn">Logout</a>
     </div>
   </nav>
@@ -26,26 +29,19 @@
     </div>
 
     <div class="stats-cards">
-      <div class="card">
-        <h3>5</h3>
-        <p>Total Complaints</p>
-      </div>
-      <div class="card">
-        <h3>2</h3>
-        <p>Pending</p>
-      </div>
-      <div class="card">
-        <h3>2</h3>
-        <p>In Progress</p>
-      </div>
-      <div class="card">
-        <h3>1</h3>
-        <p>Resolved</p>
-      </div>
+      <div class="card"><h3>5</h3><p>Total Complaints</p></div>
+      <div class="card"><h3>2</h3><p>Pending</p></div>
+      <div class="card"><h3>2</h3><p>In Progress</p></div>
+      <div class="card"><h3>1</h3><p>Resolved</p></div>
+    </div>
+
+    <div class="chart-section">
+      <h3>Complaint Overview</h3>
+      <canvas id="complaintChart" width="400" height="200"></canvas>
     </div>
 
     <h3 style="color:#556B2F; margin-bottom:1rem;">Recent Complaints</h3>
-    <table class="complaint-table">
+    <table class="complaint-table" id="complaintTable">
       <thead>
         <tr>
           <th>Title</th>
@@ -55,19 +51,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr data-status="In Progress">
           <td>Leaky Faucet</td>
           <td>Maintenance</td>
           <td>22 Oct 2025</td>
           <td class="status-inprogress">In Progress</td>
         </tr>
-        <tr>
+        <tr data-status="Pending">
           <td>Room Heater Not Working</td>
           <td>Room Issue</td>
           <td>20 Oct 2025</td>
           <td class="status-pending">Pending</td>
         </tr>
-        <tr>
+        <tr data-status="Resolved">
           <td>Mess Food Quality</td>
           <td>Mess / Food</td>
           <td>18 Oct 2025</td>
@@ -76,17 +72,52 @@
       </tbody>
     </table>
   </div>
-<footer>
-  <div class="footer-inline">
-    <p>© 2025 FixMyHostel — Making Hostels Smarter 🌿</p>
-    <p>Made with ❤️ by <strong>Team OnlyCodes</strong></p>
-    <p>Contact Us: 
-      <a href="mailto:contact@fixmyhostel.com">contact@fixmyhostel.com</a> | 
-      <a href="tel:+919876543210">+91 98765 43210</a>
-    </p>
-  </div>
-</footer>
 
+  <footer>
+    <div class="footer-inline">
+      <p>© 2025 FixMyHostel — Making Hostels Smarter 🌿</p>
+      <p>Made with ❤️ by <strong>Team OnlyCodes</strong></p>
+      <p>Contact Us:
+        <a href="mailto:contact@fixmyhostel.com">contact@fixmyhostel.com</a> |
+        <a href="tel:+919876543210">+91 98765 43210</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // collect complaint data
+    const rows = document.querySelectorAll('#complaintTable tbody tr');
+    let pending = 0, inProgress = 0, resolved = 0;
+
+    rows.forEach(row => {
+      const status = row.dataset.status;
+      if (status === "Pending") pending++;
+      else if (status === "In Progress") inProgress++;
+      else if (status === "Resolved") resolved++;
+    });
+
+    // render chart
+    const ctx = document.getElementById('complaintChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Pending', 'In Progress', 'Resolved'],
+        datasets: [{
+          data: [pending, inProgress, resolved],
+          backgroundColor: ['#FFD37A', '#85B9E6', '#A4D97D'],
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        plugins: { legend: { position: 'bottom' } },
+        cutout: '65%',
+        animation: { animateRotate: true, animateScale: true }
+      }
+    });
+  </script>
 </body>
 </html>
+
+
+
 
