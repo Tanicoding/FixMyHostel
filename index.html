@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FixMyHostel - Status</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FixMyHostel - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <nav class="navbar">
@@ -14,66 +14,49 @@
       <a href="index.html" class="active">Home</a>
       <a href="dashb.html">Dashboard</a>
       <a href="comp.html">Complaint</a>
-      <a href="status.html" >Status</a>
-      <a href="login.html" class="login-btn">Logout</a>
+      <a href="status.html">Status</a>
+      <a href="login.html" class="login-btn">Login</a>
     </div>
   </nav>
-
-  <div class="container">
-    <div class="page-title">Complaint Status</div>
-
-    <div class="filters">
-      <button onclick="filterStatus('all')">All</button>
-      <button onclick="filterStatus('pending')">Pending</button>
-      <button onclick="filterStatus('inprogress')">In Progress</button>
-      <button onclick="filterStatus('resolved')">Resolved</button>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Transform Hostel Maintenance with <span>FixMyHostel</span></h1>
+      <p>
+        A smart, digital platform that simplifies the way hostel issues are reported,
+        tracked, and resolved — ensuring transparency, speed, and accountability.
+      </p>
+      <div class="hero-buttons">
+        <a href="comp.html" class="btn primary-btn">Register Complaint</a>
+        <a href="dashb.html" class="btn secondary-btn">Go to Dashboard</a>
+      </div>
     </div>
-
-    <table class="complaint-table" id="statusTable">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Category</th>
-          <th>Date Submitted</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="pending">
-          <td>Room Heater Not Working</td>
-          <td>Room Issue</td>
-          <td>20 Oct 2025</td>
-          <td class="status-pending">Pending</td>
-        </tr>
-        <tr class="inprogress">
-          <td>Leaky Faucet</td>
-          <td>Maintenance</td>
-          <td>22 Oct 2025</td>
-          <td class="status-inprogress">In Progress</td>
-        </tr>
-        <tr class="resolved">
-          <td>Mess Food Quality</td>
-          <td>Mess / Food</td>
-          <td>18 Oct 2025</td>
-          <td class="status-resolved">Resolved</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <script>
-    function filterStatus(status) {
-      const rows = document.querySelectorAll('#statusTable tbody tr');
-      rows.forEach(row => {
-        if(status === 'all') {
-          row.style.display = '';
-        } else if(row.classList.contains(status)) {
-          row.style.display = '';
-        } else {
-          row.style.display = 'none';
-        }
-      });
-    }
-  </script>
+    <div class="hero-image">
+      <img src="https://cdn.dribbble.com/users/25514/screenshots/15842108/media/f7a21bb469a23d6b21b5d76825b3e87f.png" alt="Hostel Management Illustration">
+    </div>
+  </section>
+  <section class="features">
+    <h2>Why Choose FixMyHostel?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>📋 Easy Complaint Registration</h3>
+        <p>Submit issues with details and images directly from your phone or laptop.</p>
+      </div>
+      <div class="feature-card">
+        <h3>⚡ Real-time Tracking</h3>
+        <p>Monitor complaint progress live — Pending, In Progress, or Resolved.</p>
+      </div>
+      <div class="feature-card">
+        <h3>📊 Smart Analytics</h3>
+        <p>Admins get data insights on frequent issues and maintenance efficiency.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🔔 Instant Notifications</h3>
+        <p>Stay updated with email or push alerts for every status change.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 FixMyHostel — Making Hostels Smarter 🌿</p>
+  </footer>
 </body>
 </html>
