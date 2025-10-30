@@ -115,11 +115,14 @@
   </footer>
 
 <script>
-  // Clears all previous data on refresh (optional)
+  // Optional: clear old data when page refreshes
   localStorage.clear();
 
-  document.addEventListener('DOMContentLoaded', loadComplaints);
+  document.addEventListener('DOMContentLoaded', () => {
+    loadComplaints();
+  });
 
+  // Handle complaint submission
   document.querySelector('form').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -132,13 +135,13 @@
       return;
     }
 
-    // Generate unique complaint ID
-    const complaintID = 'CMP-' + Math.floor(10000 + Math.random() * 90000);
+    // ✅ Generate unique Complaint ID (e.g., CMP-2025103012345)
+    const complaintID = 'CMP-' + Date.now().toString().slice(-6);
 
     // Create complaint object
     const newComplaint = {
       id: Date.now(),
-      complaintID, // added ID
+      complaintID,
       title,
       description,
       category,
@@ -146,37 +149,44 @@
       status: 'Pending'
     };
 
-    // Save complaint in localStorage
+    // Get existing complaints
     const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+
+    // Add new complaint
     complaints.unshift(newComplaint);
     localStorage.setItem('complaints', JSON.stringify(complaints));
 
-    // Show alert with complaint ID
+    // ✅ Show the ID clearly in alert
     alert(`✅ Complaint submitted successfully!\nYour Complaint ID: ${complaintID}`);
 
     this.reset();
     loadComplaints();
   });
 
-  // Function to load complaints
+  // Load and display complaints
   function loadComplaints() {
     const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
     const container = document.querySelector('.recent-complaints');
 
-    if (complaints.length > 0) {
-      container.innerHTML = `<h3>Recent Complaints</h3>` +
-        complaints.map(c => `
-          <div class="complaint-card">
-            <h4>${c.title}</h4>
-            <p><strong>ID:</strong> ${c.complaintID}</p>
-            <p>Category: ${c.category}</p>
-            <p>Date: ${c.date}</p>
-            <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
-          </div>
-        `).join('');
+    if (complaints.length === 0) {
+      container.innerHTML = `<h3>Recent Complaints</h3><p>No complaints yet.</p>`;
+      return;
     }
+
+    // ✅ Each complaint card now includes the Complaint ID
+    container.innerHTML = `<h3>Recent Complaints</h3>` +
+      complaints.map(c => `
+        <div class="complaint-card">
+          <h4>${c.title}</h4>
+          <p><strong>Complaint ID:</strong> ${c.complaintID}</p>
+          <p>Category: ${c.category}</p>
+          <p>Date: ${c.date}</p>
+          <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
+        </div>
+      `).join('');
   }
 </script>
+
 
 
 
