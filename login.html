@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixMyHostel - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .login-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+      background: linear-gradient(135deg, #E6ECD9, #F9FAF8);
+      padding: 2rem;
+    }
+
+    .login-box {
+      background: #fff;
+      padding: 2.5rem 3rem;
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      max-width: 420px;
+      width: 100%;
+      animation: fadeIn 1.3s ease-in-out;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      color: #3F5320;
+      margin-bottom: 1.8rem;
+      font-size: 1.8rem;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid #C3D6A5;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .login-box input:focus {
+      border-color: #556B2F;
+      outline: none;
+      box-shadow: 0 0 6px rgba(107, 142, 35, 0.3);
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background-color: #556B2F;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .login-box button:hover {
+      background-color: #6B8E23;
+      transform: translateY(-2px);
+    }
+
+    .login-box p {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    .login-box a {
+      color: #556B2F;
+      font-weight: 600;
+    }
+
+    .navbar {
+      box-shadow: none;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">FixMyHostel</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="login.html" class="login-btn">Login</a>
+    </div>
+  </nav>
+
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Welcome Back</h2>
+      <form id="loginForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <a href="#">Contact Admin</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inline">
+      <p>© 2025 FixMyHostel — Making Hostels Smarter 🌿</p>
+      <p>Made with ❤️ by <strong>Team OnlyCodes</strong></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if(username === "student" && password === "abcd") {
+        alert("✅ Credentials verified! Redirecting to OTP verification...");
+        window.location.href = "otp.html";
+      } else {
+        alert("❌ Invalid username or password.\nTry username: student, password: abcd");
+      }
+    });
+  </script>
+
+</body>
+</html>
