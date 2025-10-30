@@ -114,9 +114,9 @@
     </div>
   </footer>
 
-  <script>
-
-    localStorage.clear();
+<script>
+  // Clears all previous data on refresh (optional)
+  localStorage.clear();
 
   document.addEventListener('DOMContentLoaded', loadComplaints);
 
@@ -132,8 +132,13 @@
       return;
     }
 
+    // Generate unique complaint ID
+    const complaintID = 'CMP-' + Math.floor(10000 + Math.random() * 90000);
+
+    // Create complaint object
     const newComplaint = {
       id: Date.now(),
+      complaintID, // added ID
       title,
       description,
       category,
@@ -141,35 +146,38 @@
       status: 'Pending'
     };
 
+    // Save complaint in localStorage
     const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
     complaints.unshift(newComplaint);
     localStorage.setItem('complaints', JSON.stringify(complaints));
 
-    alert('✅ Complaint submitted successfully!');
+    // Show alert with complaint ID
+    alert(`✅ Complaint submitted successfully!\nYour Complaint ID: ${complaintID}`);
+
     this.reset();
     loadComplaints();
   });
 
+  // Function to load complaints
   function loadComplaints() {
     const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
     const container = document.querySelector('.recent-complaints');
-
 
     if (complaints.length > 0) {
       container.innerHTML = `<h3>Recent Complaints</h3>` +
         complaints.map(c => `
           <div class="complaint-card">
             <h4>${c.title}</h4>
+            <p><strong>ID:</strong> ${c.complaintID}</p>
             <p>Category: ${c.category}</p>
             <p>Date: ${c.date}</p>
             <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
           </div>
         `).join('');
     }
-
   }
-
 </script>
+
 
 
 
