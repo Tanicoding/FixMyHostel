@@ -1181,3 +1181,20 @@ button {
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
+
+
+.priority.high {
+  color: #ff3b30;
+  font-weight: 600;
+}
+
+.priority.medium {
+  color: #ff9500;
+  font-weight: 600;
+}
+
+.priority.normal {
+  color: #34c759;
+  font-weight: 600;
+}
+

@@ -114,15 +114,12 @@
     </div>
   </footer>
 
-<script>
-  // Optional: clear old data when page refreshes
+  <script>
+  // Optional: clear data on refresh (for demo)
   localStorage.clear();
 
-  document.addEventListener('DOMContentLoaded', () => {
-    loadComplaints();
-  });
+  document.addEventListener('DOMContentLoaded', loadComplaints);
 
-  // Handle complaint submission
   document.querySelector('form').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -135,8 +132,11 @@
       return;
     }
 
-    // ✅ Generate unique Complaint ID (e.g., CMP-2025103012345)
+    // Generate unique Complaint ID
     const complaintID = 'CMP-' + Date.now().toString().slice(-6);
+
+    // ✅ Determine priority automatically
+    const priority = getPriorityLevel(title + " " + description);
 
     // Create complaint object
     const newComplaint = {
@@ -145,25 +145,37 @@
       title,
       description,
       category,
+      priority,
       date: new Date().toLocaleDateString('en-IN'),
       status: 'Pending'
     };
 
-    // Get existing complaints
+    // Save to localStorage
     const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
-
-    // Add new complaint
     complaints.unshift(newComplaint);
     localStorage.setItem('complaints', JSON.stringify(complaints));
 
-    // ✅ Show the ID clearly in alert
-    alert(`✅ Complaint submitted successfully!\nYour Complaint ID: ${complaintID}`);
-
+    alert(`✅ Complaint submitted successfully!\nYour Complaint ID: ${complaintID}\nPriority: ${priority}`);
     this.reset();
     loadComplaints();
   });
 
-  // Load and display complaints
+  // 🔍 Auto-priority detection based on keywords
+  function getPriorityLevel(text) {
+    text = text.toLowerCase();
+
+    const highKeywords = ['fire', 'water', 'leak', 'electric', 'shock', 'broken', 'urgent', 'danger', 'no light', 'no power'];
+    const mediumKeywords = ['food', 'mess', 'wifi', 'cleaning', 'dirty', 'slow', 'noise'];
+    const normalKeywords = ['suggestion', 'request', 'improve', 'feedback', 'help'];
+
+    if (highKeywords.some(k => text.includes(k))) return 'High';
+    if (mediumKeywords.some(k => text.includes(k))) return 'Medium';
+    if (normalKeywords.some(k => text.includes(k))) return 'Normal';
+    
+    return 'Medium'; // default
+  }
+
+  // Load complaints
   function loadComplaints() {
     const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
     const container = document.querySelector('.recent-complaints');
@@ -173,19 +185,22 @@
       return;
     }
 
-    // ✅ Each complaint card now includes the Complaint ID
     container.innerHTML = `<h3>Recent Complaints</h3>` +
       complaints.map(c => `
         <div class="complaint-card">
           <h4>${c.title}</h4>
-          <p><strong>Complaint ID:</strong> ${c.complaintID}</p>
+          <p><strong>ID:</strong> ${c.complaintID}</p>
           <p>Category: ${c.category}</p>
           <p>Date: ${c.date}</p>
           <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
+          <p><strong>Priority:</strong> 
+            <span class="priority ${c.priority.toLowerCase()}">${c.priority}</span>
+          </p>
         </div>
       `).join('');
   }
 </script>
+
 
 
 
