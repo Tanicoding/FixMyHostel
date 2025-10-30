@@ -117,7 +117,6 @@
   <script>
   document.addEventListener('DOMContentLoaded', loadComplaints);
 
-  // Handle complaint form submission
   document.querySelector('form').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -139,7 +138,6 @@
       status: 'Pending'
     };
 
-    // Get existing complaints
     const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
     complaints.unshift(newComplaint);
     localStorage.setItem('complaints', JSON.stringify(complaints));
@@ -149,12 +147,11 @@
     loadComplaints();
   });
 
-  // Load complaints (and keep demo visible if none exist)
   function loadComplaints() {
     const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
     const container = document.querySelector('.recent-complaints');
 
-    // ✅ If there are saved complaints → show only those
+
     if (complaints.length > 0) {
       container.innerHTML = `<h3>Recent Complaints</h3>` +
         complaints.map(c => `
@@ -166,7 +163,7 @@
           </div>
         `).join('');
     }
-    // ❌ else → do nothing (keep your demo complaints visible)
+
   }
 </script>
 
