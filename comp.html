@@ -113,93 +113,93 @@
       </p>
     </div>
   </footer>
+<script>
+document.addEventListener('DOMContentLoaded', loadComplaints);
+localStorage.clear(); // just for demo — remove later
 
-  <script>
-  // Optional: clear data on refresh (for demo)
-  localStorage.clear();
+document.querySelector('form').addEventListener('submit', function (e) {
+  e.preventDefault();
 
-  document.addEventListener('DOMContentLoaded', loadComplaints);
+  const title = this.querySelector('input').value.trim();
+  const description = this.querySelector('textarea').value.trim();
+  const category = this.querySelector('select').value;
 
-  document.querySelector('form').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const title = this.querySelector('input').value.trim();
-    const description = this.querySelector('textarea').value.trim();
-    const category = this.querySelector('select').value;
-
-    if (!title || !description || !category) {
-      alert('⚠️ Please fill in all fields!');
-      return;
-    }
-
-    // Generate unique Complaint ID
-    const complaintID = 'CMP-' + Date.now().toString().slice(-6);
-
-    // ✅ Determine priority automatically
-    const priority = getPriorityLevel(title + " " + description);
-
-    // Create complaint object
-    const newComplaint = {
-      id: Date.now(),
-      complaintID,
-      title,
-      description,
-      category,
-      priority,
-      date: new Date().toLocaleDateString('en-IN'),
-      status: 'Pending'
-    };
-
-    // Save to localStorage
-    const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
-    complaints.unshift(newComplaint);
-    localStorage.setItem('complaints', JSON.stringify(complaints));
-
-    alert(`✅ Complaint submitted successfully!\nYour Complaint ID: ${complaintID}\nPriority: ${priority}`);
-    this.reset();
-    loadComplaints();
-  });
-
-  // 🔍 Auto-priority detection based on keywords
-  function getPriorityLevel(text) {
-    text = text.toLowerCase();
-
-    const highKeywords = ['fire', 'water', 'leak', 'electric', 'shock', 'broken', 'urgent', 'danger', 'no light', 'no power'];
-    const mediumKeywords = ['food', 'mess', 'wifi', 'cleaning', 'dirty', 'slow', 'noise'];
-    const normalKeywords = ['suggestion', 'request', 'improve', 'feedback', 'help'];
-
-    if (highKeywords.some(k => text.includes(k))) return 'High';
-    if (mediumKeywords.some(k => text.includes(k))) return 'Medium';
-    if (normalKeywords.some(k => text.includes(k))) return 'Normal';
-    
-    return 'Medium'; // default
+  if (!title || !description || !category) {
+    alert('⚠️ Please fill in all fields!');
+    return;
   }
 
-  // Load complaints
-  function loadComplaints() {
-    const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
-    const container = document.querySelector('.recent-complaints');
+  // 👇 Auto flag priority
+  const priority = getPriorityLevel(title + " " + description);
 
-    if (complaints.length === 0) {
-      container.innerHTML = `<h3>Recent Complaints</h3><p>No complaints yet.</p>`;
-      return;
-    }
+  // 👇 Generate readable ID for user
+  const complaintID = "CMP-" + Math.floor(100000 + Math.random() * 900000);
 
+  const newComplaint = {
+    id: Date.now(),
+    complaintID,
+    title,
+    description,
+    category,
+    priority,
+    date: new Date().toLocaleDateString('en-IN'),
+    status: 'Pending'
+  };
+
+  const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+  complaints.unshift(newComplaint);
+  localStorage.setItem('complaints', JSON.stringify(complaints));
+
+  alert(`✅ Complaint submitted!\nComplaint ID: ${complaintID}\nPriority: ${priority}`);
+  this.reset();
+  loadComplaints();
+});
+
+function getPriorityLevel(text) {
+  text = text.toLowerCase();
+
+  const highKeywords = [
+    'fire', 'burning', 'smoke', 'gas leak', 'leak', 'electric', 'shock', 
+    'broken wire', 'water flooding', 'short circuit', 'danger', 'urgent', 'emergency'
+  ];
+  const mediumKeywords = [
+    'food', 'mess', 'wifi', 'internet', 'cleaning', 'dirty', 'slow', 'noise'
+  ];
+  const normalKeywords = [
+    'suggestion', 'request', 'improve', 'feedback', 'help'
+  ];
+
+  if (highKeywords.some(k => text.includes(k))) return 'High';
+  if (mediumKeywords.some(k => text.includes(k))) return 'Medium';
+  if (normalKeywords.some(k => text.includes(k))) return 'Normal';
+  return 'Medium';
+}
+
+function loadComplaints() {
+  const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+  const container = document.querySelector('.recent-complaints');
+
+  if (complaints.length > 0) {
     container.innerHTML = `<h3>Recent Complaints</h3>` +
       complaints.map(c => `
         <div class="complaint-card">
           <h4>${c.title}</h4>
-          <p><strong>ID:</strong> ${c.complaintID}</p>
           <p>Category: ${c.category}</p>
           <p>Date: ${c.date}</p>
-          <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
+          <p><strong>ID:</strong> ${c.complaintID}</p>
           <p><strong>Priority:</strong> 
             <span class="priority ${c.priority.toLowerCase()}">${c.priority}</span>
           </p>
+          <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
         </div>
       `).join('');
   }
+
+  
+}
+
 </script>
+
 
 
 
