@@ -5,47 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FixMyHostel - Complaint Status</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #f5f8f2;
-      color: #333;
-    }
-
-    /* Navbar */
-    .navbar {
-      background: #556B2F;
-      padding: 1rem 2rem;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .navbar .logo {
-      font-size: 1.4rem;
-      font-weight: 600;
-    }
-
-    .navbar .nav-links a {
-      color: white;
-      margin-left: 1rem;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .navbar .nav-links a:hover {
-      text-decoration: underline;
-    }
-
-    .navbar .login-btn {
-      background: #e6eedb;
-      color: #556B2F;
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
-      margin-left: 1rem;
-    }
+   
 
     .page-title {
       text-align: center;
@@ -204,7 +166,7 @@
 
     localStorage.removeItem("complaints"); // 👈 clear old data for demo every load
 
-    
+
     // Demo Data (in case no localStorage data exists)
     const demoComplaints = [
       { id: "CMP-1001", title: "Leaky Faucet", category: "Maintenance", date: "22 Oct 2025", status: "inprogress", description: "Water leaking continuously in bathroom" },
