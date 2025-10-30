@@ -115,12 +115,63 @@
   </footer>
 
   <script>
-    document.querySelector('form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('✅ Complaint submitted successfully!');
-      this.reset();
-    });
-  </script>
+  document.addEventListener('DOMContentLoaded', loadComplaints);
+
+  // Handle complaint form submission
+  document.querySelector('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const title = this.querySelector('input').value.trim();
+    const description = this.querySelector('textarea').value.trim();
+    const category = this.querySelector('select').value;
+
+    if (!title || !description || !category) {
+      alert('⚠️ Please fill in all fields!');
+      return;
+    }
+
+    const newComplaint = {
+      id: Date.now(),
+      title,
+      description,
+      category,
+      date: new Date().toLocaleDateString('en-IN'),
+      status: 'Pending'
+    };
+
+    // Get existing complaints
+    const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+    complaints.unshift(newComplaint);
+    localStorage.setItem('complaints', JSON.stringify(complaints));
+
+    alert('✅ Complaint submitted successfully!');
+    this.reset();
+    loadComplaints();
+  });
+
+  // Load complaints (and keep demo visible if none exist)
+  function loadComplaints() {
+    const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+    const container = document.querySelector('.recent-complaints');
+
+    // ✅ If there are saved complaints → show only those
+    if (complaints.length > 0) {
+      container.innerHTML = `<h3>Recent Complaints</h3>` +
+        complaints.map(c => `
+          <div class="complaint-card">
+            <h4>${c.title}</h4>
+            <p>Category: ${c.category}</p>
+            <p>Date: ${c.date}</p>
+            <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
+          </div>
+        `).join('');
+    }
+    // ❌ else → do nothing (keep your demo complaints visible)
+  }
+</script>
+
+
+
 
 </body>
 </html>
