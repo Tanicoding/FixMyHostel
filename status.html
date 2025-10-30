@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FixMyHostel - Status</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FixMyHostel - Complaint Status</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
   <style>
+   
+
+    .page-title {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #556B2F;
+      margin-top: 2rem;
+    }
+
     .filters {
       text-align: center;
       margin: 2rem 0;
@@ -34,20 +44,81 @@
       border-color: #556B2F;
     }
 
-    .complaint-table tbody tr {
+    #searchInput {
+      padding: 0.6rem 1rem;
+      border-radius: 25px;
+      border: 1px solid #9caf88;
+      outline: none;
+      margin-left: 1rem;
+      width: 250px;
       transition: all 0.3s ease;
+      font-family: 'Poppins';
     }
 
-    .page-title {
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: 600;
+    #searchInput:focus {
+      border-color: #556B2F;
+      box-shadow: 0 0 5px rgba(85, 107, 47, 0.4);
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto 3rem;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #e6eedb;
       color: #556B2F;
-      margin-top: 2rem;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .status {
+      padding: 4px 10px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+
+    .status-pending { background: #ff9500; }
+    .status-inprogress { background: #007aff; }
+    .status-resolved { background: #34c759; }
+    .status-high { background: #ff3b30; }
+    .status-medium { background: #ffcc00; }
+    .status-normal { background: #34c759; }
+
+    footer {
+      background: #e6eedb;
+      text-align: center;
+      padding: 1rem;
+      color: #556B2F;
+      font-weight: 500;
+    }
+
+    footer a {
+      color: #556B2F;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
-
 <body>
   <nav class="navbar">
     <div class="logo">FixMyHostel</div>
@@ -56,80 +127,118 @@
       <a href="dashb.html">Dashboard</a>
       <a href="comp.html">Complaint</a>
       <a href="status.html" class="active">Status</a>
+      <a href="reviews.html">Reviews</a>
       <a href="login.html" class="login-btn">Logout</a>
     </div>
   </nav>
 
-  <div class="container">
-    <div class="page-title">Complaint Status</div>
+  <div class="page-title">Complaint Status</div>
 
-    <div class="filters">
-      <button class="active" onclick="filterStatus('all', this)">All</button>
-      <button onclick="filterStatus('pending', this)">Pending</button>
-      <button onclick="filterStatus('inprogress', this)">In Progress</button>
-      <button onclick="filterStatus('resolved', this)">Resolved</button>
-    </div>
-
-    <table class="complaint-table" id="statusTable">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Category</th>
-          <th>Date Submitted</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="pending">
-          <td>Room Heater Not Working</td>
-          <td>Room Issue</td>
-          <td>20 Oct 2025</td>
-          <td class="status-pending">Pending</td>
-        </tr>
-        <tr class="inprogress">
-          <td>Leaky Faucet</td>
-          <td>Maintenance</td>
-          <td>22 Oct 2025</td>
-          <td class="status-inprogress">In Progress</td>
-        </tr>
-        <tr class="resolved">
-          <td>Mess Food Quality</td>
-          <td>Mess / Food</td>
-          <td>18 Oct 2025</td>
-          <td class="status-resolved">Resolved</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="filters">
+    <button class="active" onclick="filterStatus('all', this)">All</button>
+    <button onclick="filterStatus('pending', this)">Pending</button>
+    <button onclick="filterStatus('inprogress', this)">In Progress</button>
+    <button onclick="filterStatus('resolved', this)">Resolved</button>
+    <input type="text" id="searchInput" placeholder="Search by Complaint ID..." onkeyup="searchByID()">
   </div>
 
+  <table id="statusTable">
+    <thead>
+      <tr>
+        <th>Complaint ID</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Date Submitted</th>
+        <th>Status</th>
+        <th>Priority</th>
+      </tr>
+    </thead>
+    <tbody id="complaintBody">
+      <!-- Rows dynamically generated -->
+    </tbody>
+  </table>
+
   <footer>
-    <div class="footer-inline">
-      <p>© 2025 FixMyHostel — Making Hostels Smarter 🌿</p>
-      <p>Made with ❤️ by <strong>Team OnlyCodes</strong></p>
-      <p>Contact Us:
-        <a href="mailto:contact@fixmyhostel.com">contact@fixmyhostel.com</a> |
-        <a href="tel:+919876543210">+91 98765 43210</a>
-      </p>
-    </div>
+    <div>© 2025 FixMyHostel — Making Hostels Smarter 🌿 | Made with ❤️ by <strong>Team OnlyCodes</strong></div>
+    <div>Contact: <a href="mailto:contact@fixmyhostel.com">contact@fixmyhostel.com</a> | <a href="tel:+919876543210">+91 98765 43210</a></div>
   </footer>
 
   <script>
+
+    localStorage.removeItem("complaints"); // 👈 clear old data for demo every load
+
+
+    // Demo Data (in case no localStorage data exists)
+    const demoComplaints = [
+      { id: "CMP-1001", title: "Leaky Faucet", category: "Maintenance", date: "22 Oct 2025", status: "inprogress", description: "Water leaking continuously in bathroom" },
+      { id: "CMP-1002", title: "Room Heater Not Working", category: "Room Issue", date: "20 Oct 2025", status: "pending", description: "Heater not turning on" },
+      { id: "CMP-1003", title: "Mess Food Quality", category: "Mess / Food", date: "18 Oct 2025", status: "resolved", description: "Food too oily and repetitive" },
+      { id: "CMP-1004", title: "Fire in Kitchen Area", category: "Safety", date: "19 Oct 2025", status: "pending", description: "Fire hazard in hostel mess" },
+      { id: "CMP-1005", title: "Water Leakage in Bathroom", category: "Plumbing", date: "17 Oct 2025", status: "inprogress", description: "Ceiling dripping continuously" },
+      { id: "CMP-1006", title: "Fan Not Working", category: "Electricity", date: "15 Oct 2025", status: "pending", description: "Fan not rotating properly" }
+    ];
+
+    // Save demo data to localStorage only if empty
+    if (!localStorage.getItem("complaints")) {
+      localStorage.setItem("complaints", JSON.stringify(demoComplaints));
+    }
+
+    // Fetch data
+    let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
+
+    // Auto-flag priority
+    complaints = complaints.map(c => {
+      const text = c.title.toLowerCase() + " " + c.description.toLowerCase();
+      if (text.includes("fire") || text.includes("electrocute") || text.includes("gas leak")) {
+        c.priority = "high";
+      } else if (text.includes("water") || text.includes("heater") || text.includes("leak")) {
+        c.priority = "medium";
+      } else {
+        c.priority = "normal";
+      }
+      return c;
+    });
+
+    // Render table
+    const tbody = document.getElementById("complaintBody");
+    tbody.innerHTML = "";
+    complaints.forEach(c => {
+      const tr = document.createElement("tr");
+      tr.classList.add(c.status);
+      tr.innerHTML = `
+        <td>${c.id}</td>
+        <td>${c.title}</td>
+        <td>${c.category}</td>
+        <td>${c.date}</td>
+        <td><span class="status status-${c.status}">${c.status}</span></td>
+        <td><span class="status status-${c.priority}">${c.priority}</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    // Filter by status
     function filterStatus(status, button) {
-      const rows = document.querySelectorAll('#statusTable tbody tr');
-      const buttons = document.querySelectorAll('.filters button');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
+      const rows = document.querySelectorAll("#complaintBody tr");
+      const buttons = document.querySelectorAll(".filters button");
+      buttons.forEach(btn => btn.classList.remove("active"));
+      button.classList.add("active");
 
       rows.forEach(row => {
-        row.style.opacity = 0;
-        setTimeout(() => {
-          if (status === 'all' || row.classList.contains(status)) {
-            row.style.display = '';
-            setTimeout(() => row.style.opacity = 1, 50);
-          } else {
-            row.style.display = 'none';
-          }
-        }, 200);
+        if (status === "all" || row.classList.contains(status)) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    }
+
+    // Search by Complaint ID
+    function searchByID() {
+      const input = document.getElementById("searchInput").value.toUpperCase();
+      const rows = document.querySelectorAll("#complaintBody tr");
+      rows.forEach(row => {
+        const id = row.getElementsByTagName("td")[0].textContent.toUpperCase();
+        row.style.display = id.includes(input) ? "" : "none";
       });
     }
   </script>

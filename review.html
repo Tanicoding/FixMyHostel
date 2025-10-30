@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixMyHostel - Reviews</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* --- Review Page Specific Styling --- */
+    .review-container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.08);
+    }
+
+    .review-container h2 {
+      color: #556B2F;
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .review-form {
+      background-color: #F9FAF8;
+      border: 1px solid #E0E4D9;
+      padding: 2rem;
+      border-radius: 10px;
+      margin-bottom: 3rem;
+    }
+
+    .review-form h3 {
+      color: #3F5320;
+      margin-bottom: 1rem;
+    }
+
+    .review-form input,
+    .review-form select,
+    .review-form textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1px solid #C3D6A5;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .review-form textarea {
+      resize: none;
+    }
+
+    .star-rating {
+      display: flex;
+      gap: 0.4rem;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .star-rating span.active {
+      color: #FFD700;
+    }
+
+    .review-form button {
+      background-color: #556B2F;
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .review-form button:hover {
+      background-color: #6B8E23;
+      transform: scale(1.05);
+    }
+
+    .review-list {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background-color: #F2F5F1;
+      border-left: 6px solid #556B2F;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .review-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.1);
+    }
+
+    .review-card h4 {
+      color: #3F5320;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-card p {
+      color: #4B5320;
+      font-size: 0.95rem;
+      margin: 0.3rem 0;
+    }
+
+    .review-card .rating {
+      color: #FFD700;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .review-container {
+        margin: 2rem 1rem;
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">FixMyHostel</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashb.html">Dashboard</a>
+      <a href="comp.html">Complaint</a>
+      <a href="status.html">Status</a>
+      <a href="reviews.html" class="active">Reviews</a>
+      <a href="login.html" class="login-btn">Logout</a>
+    </div>
+  </nav>
+
+  <div class="review-container">
+    <h2>Student Reviews & Feedback</h2>
+
+    <!-- Submit Review Form -->
+    <div class="review-form">
+      <h3>Share Your Experience</h3>
+      <input type="text" placeholder="Your Name" required>
+      <select required>
+        <option value="" disabled selected>Select Category</option>
+        <option>Room Maintenance</option>
+        <option>Mess / Food</option>
+        <option>Wi-Fi / Connectivity</option>
+        <option>Cleanliness</option>
+        <option>Other</option>
+      </select>
+      <div class="star-rating" id="stars">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+      </div>
+      <textarea rows="4" placeholder="Write your review..." required></textarea>
+      <button type="submit">Submit Review</button>
+    </div>
+
+    <!-- Displayed Reviews -->
+    <div class="review-list">
+      <div class="review-card">
+        <h4>Mess Food Quality</h4>
+        <div class="rating">⭐⭐⭐⭐☆</div>
+        <p>"Food has really improved this semester. Staff was quick to respond to complaints."</p>
+        <p><strong>- Aditi, Block B</strong></p>
+      </div>
+
+      <div class="review-card">
+        <h4>Wi-Fi Connectivity</h4>
+        <div class="rating">⭐⭐⭐☆☆</div>
+        <p>"Wi-Fi issues still occur at night, but at least they are addressed faster now."</p>
+        <p><strong>- Rahul, ECE 2nd Year</strong></p>
+      </div>
+
+      <div class="review-card">
+        <h4>Cleanliness</h4>
+        <div class="rating">⭐⭐⭐⭐⭐</div>
+        <p>"Cleaning schedules are followed properly now. Hostel looks much better."</p>
+        <p><strong>- Meera, CSE 3rd Year</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simple star rating interaction
+    const stars = document.querySelectorAll('#stars span');
+    stars.forEach((star, index) => {
+      star.addEventListener('click', () => {
+        stars.forEach((s, i) => s.classList.toggle('active', i <= index));
+      });
+    });
+  </script>
+</body>
+</html>
