@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FixMyHostel - OTP Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .otp-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+      background: linear-gradient(135deg, #E6ECD9, #F9FAF8);
+      padding: 2rem;
+    }
+
+    .otp-box {
+      background: #fff;
+      padding: 2.5rem 3rem;
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      max-width: 420px;
+      width: 100%;
+      animation: fadeIn 1.3s ease-in-out;
+      text-align: center;
+    }
+
+    .otp-box h2 {
+      color: #3F5320;
+      margin-bottom: 1rem;
+      font-size: 1.7rem;
+    }
+
+    .otp-box p {
+      color: #444;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .otp-box input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid #C3D6A5;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      text-align: center;
+      letter-spacing: 4px;
+    }
+
+    .otp-box input:focus {
+      border-color: #556B2F;
+      outline: none;
+      box-shadow: 0 0 6px rgba(107, 142, 35, 0.3);
+    }
+
+    .otp-box button {
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background-color: #556B2F;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .otp-box button:hover {
+      background-color: #6B8E23;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logo">FixMyHostel</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="login.html">Logout</a>
+    </div>
+  </nav>
+
+  <div class="otp-container">
+    <div class="otp-box">
+      <h2>Email Authentication</h2>
+      <p>We’ve sent a 4-digit OTP to your registered email.<br>Enter it below to continue.</p>
+
+      <form id="otpForm">
+        <input type="text" id="otp" maxlength="4" placeholder="----" required>
+        <button type="submit">Verify OTP</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inline">
+      <p>© 2025 FixMyHostel — Making Hostels Smarter 🌿</p>
+      <p>Made with ❤️ by <strong>Team OnlyCodes</strong></p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('otpForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const otp = document.getElementById('otp').value.trim();
+
+      if(otp === "1234") {
+        alert("✅ OTP verified successfully!");
+        window.location.href = "dashb.html";
+      } else {
+        alert("❌ Incorrect OTP. Try 1234.");
+      }
+    });
+  </script>
+
+</body>
+</html>
