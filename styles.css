@@ -145,9 +145,6 @@ a {
   50% { transform: translateY(-10px); }
 }
 
-/* ================================
-   CONTENT SECTIONS (Problem, Solution, etc.)
-================================ */
 .section {
   padding: 4rem 10%;
   background: #fff;
@@ -312,11 +309,6 @@ footer {
   }
 }
 
-
-
-/* ================================
-   PROBLEM / SOLUTION / FEATURES / UNIQUE SECTIONS
-================================ */
 .problem-section,
 .solution-section,
 .features-section,
@@ -370,9 +362,6 @@ footer {
   max-width: 900px;
 }
 
-/* ================================
-   FEATURE LIST
-================================ */
 .feature-list {
   display: grid;
   gap: 1.2rem;
@@ -391,9 +380,6 @@ footer {
   transform: translateX(8px);
 }
 
-/* ================================
-   HOW IT WORKS
-================================ */
 .how-it-works {
   background-color: #F7F9F5;
 }
@@ -425,9 +411,6 @@ footer {
   margin-bottom: 0.8rem;
 }
 
-/* ================================
-   UNIQUE SECTION
-================================ */
 .unique-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -453,9 +436,6 @@ footer {
   margin-bottom: 0.5rem;
 }
 
-/* ================================
-   RESPONSIVE TWEAKS
-================================ */
 @media (max-width: 768px) {
   .feature-list,
   .steps-grid,
@@ -471,7 +451,6 @@ footer {
     margin: 0 auto 2rem;
   }
 }
-
 
 .container {
   max-width: 1200px; margin:3rem auto; padding:0 2rem;
@@ -549,7 +528,6 @@ footer {
   font-weight: 600; 
 }
 
-  
 @media (max-width: 768px) {
       .navbar { 
         flex-direction: column; 
@@ -685,9 +663,6 @@ button {
   to { opacity: 1; transform: translateY(0); }
 }
 
-
-/* DASHBOARD POLISH */
-/* ========================= */
 .dashboard-container {
   max-width: 1200px;
   margin: 3rem auto;
@@ -954,7 +929,6 @@ button {
   }
 }
 
-/* Complaint Info Section */
 .complaint-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -995,7 +969,6 @@ button {
   box-shadow: 0 4px 14px rgba(0,0,0,0.08);
 }
 
-/* Responsive tweak */
 @media (max-width: 900px) {
   .complaint-info {
     grid-template-columns: 1fr;
@@ -1007,7 +980,6 @@ button {
   }
 }
 
-/* Dashboard Container */
 .dashboard-container {
   max-width: 1100px;
   margin: 3rem auto;
@@ -1025,7 +997,6 @@ button {
   margin-bottom: 0.5rem;
 }
 
-/* Stat Cards */
 .stats-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1066,7 +1037,6 @@ button {
   font-size: 1rem;
 }
 
-/* Table */
 .table-heading {
   color: #556B2F;
   margin-bottom: 1rem;
@@ -1099,7 +1069,6 @@ button {
   background: #F9FCF6;
 }
 
-/* Status Colors */
 .status-pending {
   color: #C57B00;
   font-weight: 600;
@@ -1115,7 +1084,6 @@ button {
   font-weight: 600;
 }
 
-/* Responsive */
 @media (max-width: 700px) {
   .stats-cards {
     grid-template-columns: 1fr 1fr;
@@ -1180,7 +1148,7 @@ button {
   color: #556B2F;
   margin-bottom: 1.5rem;
   font-weight: 600;
-}
+
 
 
 .priority.high {
@@ -1197,4 +1165,5 @@ button {
   color: #34c759;
   font-weight: 600;
 }
+
 
