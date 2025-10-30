@@ -154,7 +154,6 @@
       </tr>
     </thead>
     <tbody id="complaintBody">
-      <!-- Rows dynamically generated -->
     </tbody>
   </table>
 
@@ -165,10 +164,7 @@
 
   <script>
 
-    localStorage.removeItem("complaints"); // 👈 clear old data for demo every load
-
-
-    // Demo Data (in case no localStorage data exists)
+    localStorage.removeItem("complaints"); 
     const demoComplaints = [
       { id: "CMP-1001", title: "Leaky Faucet", category: "Maintenance", date: "22 Oct 2025", status: "inprogress", description: "Water leaking continuously in bathroom" },
       { id: "CMP-1002", title: "Room Heater Not Working", category: "Room Issue", date: "20 Oct 2025", status: "pending", description: "Heater not turning on" },
@@ -178,15 +174,12 @@
       { id: "CMP-1006", title: "Fan Not Working", category: "Electricity", date: "15 Oct 2025", status: "pending", description: "Fan not rotating properly" }
     ];
 
-    // Save demo data to localStorage only if empty
     if (!localStorage.getItem("complaints")) {
       localStorage.setItem("complaints", JSON.stringify(demoComplaints));
     }
 
-    // Fetch data
     let complaints = JSON.parse(localStorage.getItem("complaints")) || [];
 
-    // Auto-flag priority
     complaints = complaints.map(c => {
       const text = c.title.toLowerCase() + " " + c.description.toLowerCase();
       if (text.includes("fire") || text.includes("electrocute") || text.includes("gas leak")) {
@@ -199,7 +192,6 @@
       return c;
     });
 
-    // Render table
     const tbody = document.getElementById("complaintBody");
     tbody.innerHTML = "";
     complaints.forEach(c => {
@@ -216,7 +208,6 @@
       tbody.appendChild(tr);
     });
 
-    // Filter by status
     function filterStatus(status, button) {
       const rows = document.querySelectorAll("#complaintBody tr");
       const buttons = document.querySelectorAll(".filters button");
@@ -232,7 +223,6 @@
       });
     }
 
-    // Search by Complaint ID
     function searchByID() {
       const input = document.getElementById("searchInput").value.toUpperCase();
       const rows = document.querySelectorAll("#complaintBody tr");

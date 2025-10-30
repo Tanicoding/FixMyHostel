@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* --- Review Page Specific Styling --- */
     .review-container {
       max-width: 1000px;
       margin: 3rem auto;
@@ -139,7 +138,6 @@
   <div class="review-container">
     <h2>Student Reviews & Feedback</h2>
 
-    <!-- Submit Review Form -->
     <div class="review-form">
       <h3>Share Your Experience</h3>
       <input type="text" placeholder="Your Name" required>
@@ -158,7 +156,6 @@
       <button type="submit">Submit Review</button>
     </div>
 
-    <!-- Displayed Reviews -->
     <div class="review-list">
       <div class="review-card">
         <h4>Mess Food Quality</h4>
@@ -184,7 +181,6 @@
   </div>
 
   <script>
-    // Simple star rating interaction
     const stars = document.querySelectorAll('#stars span');
     stars.forEach((star, index) => {
       star.addEventListener('click', () => {

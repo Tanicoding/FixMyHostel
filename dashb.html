@@ -8,7 +8,24 @@
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* DASHBOARD ALIGNMENT AND CHART STYLING */
+
+    .noticeboard {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 3rem;
+    }
+
+    .notice-card {
+      background-color: #F2F5F1;
+      border-left: 5px solid #556B2F;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      color: #3F5320;
+      font-weight: 500;
+    }
     .overview-section {
       display: flex;
       justify-content: space-between;
@@ -105,7 +122,6 @@
       <p>Here’s a quick overview of your hostel complaints and status updates.</p>
     </div>
 
-    <!-- Overview Section -->
     <div class="overview-section">
       <div class="stats-cards">
         <div class="card"><h3>5</h3><p>Total Complaints</p></div>
@@ -120,7 +136,6 @@
       </div>
     </div>
 
-    <!-- Noticeboard Section -->
     <div class="noticeboard">
       <h3 style="color:#556B2F; margin-bottom:1rem;">Hostel Noticeboard 📢</h3>
       <div class="notice-card">
@@ -208,26 +223,6 @@
     });
   </script>
 
-  <style>
-    /* Noticeboard Styling */
-    .noticeboard {
-      background-color: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.05);
-      margin-bottom: 3rem;
-    }
-
-    .notice-card {
-      background-color: #F2F5F1;
-      border-left: 5px solid #556B2F;
-      padding: 1rem;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-      color: #3F5320;
-      font-weight: 500;
-    }
-  </style>
 </body>
 </html>
 

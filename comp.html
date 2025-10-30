@@ -119,7 +119,6 @@
       <option>Other</option>
     </select>
 
-    <!-- 👇 New: Image Upload -->
     <label for="imageUpload" style="font-weight:500; margin-top:1rem; display:block;">Attach Image (optional)</label>
     <input type="file" id="imageUpload" accept="image/*" style="margin-bottom:1rem;">
     <div id="imagePreview" style="margin-bottom:1rem;"></div>
@@ -152,7 +151,6 @@
     </div>
   </div>
 
-  <!-- 👇 NEW CONTACT SECTION -->
   <section class="contact-section">
     <h3>Contact Warden & Staff 📞</h3>
     <div class="contact-grid">
@@ -197,7 +195,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', loadComplaints);
-    localStorage.clear(); // demo only, remove later
+    localStorage.clear(); 
 
     document.querySelector('form').addEventListener('submit', function (e) {
       e.preventDefault();
@@ -262,7 +260,6 @@
       }
     }
 
-    // Image preview
 const imageInput = document.getElementById('imageUpload');
 const imagePreview = document.getElementById('imagePreview');
 let uploadedImage = "";
@@ -279,7 +276,6 @@ imageInput.addEventListener('change', function () {
   }
 });
 
-// Modify your existing submit listener
 document.getElementById('complaintForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -318,7 +314,6 @@ document.getElementById('complaintForm').addEventListener('submit', function (e)
   loadComplaints();
 });
 
-// Update your loadComplaints() function to display image
 function loadComplaints() {
   const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
   const container = document.querySelector('.recent-complaints');
