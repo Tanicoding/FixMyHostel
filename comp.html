@@ -6,6 +6,52 @@
   <title>FixMyHostel - Complaint Management</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .contact-section {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.05);
+      margin: 3rem auto;
+      width: 90%;
+    }
+
+    .contact-section h3 {
+      color: #556B2F;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+    }
+
+    .contact-card {
+      background-color: #F2F5F1;
+      border-left: 5px solid #6B8E23;
+      padding: 1rem;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .contact-card h4 {
+      color: #3F5320;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card p {
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.5;
+    }
+  </style>
 </head>
 <body>
 
@@ -25,7 +71,7 @@
     <div class="info-content">
       <h2>Smart Complaint Management for Your Hostel</h2>
       <p>
-        FixMyHostels Complaint Management System helps hostel residents raise, monitor, 
+        FixMyHostel’s Complaint Management System helps hostel residents raise, monitor, 
         and resolve issues efficiently. It ensures transparent communication between students 
         and the administration for a better hostel experience.
       </p>
@@ -61,20 +107,27 @@
 
   <div class="container">
     <div class="complaint-form">
-      <h3>Submit a Complaint</h3>
-      <form>
-        <input type="text" placeholder="Complaint Title" required>
-        <textarea rows="5" placeholder="Describe your issue..." required></textarea>
-        <select required>
-          <option value="" disabled selected>Category</option>
-          <option>Room Issue</option>
-          <option>Mess / Food</option>
-          <option>Maintenance</option>
-          <option>Other</option>
-        </select>
-        <button type="submit">Submit Complaint</button>
-      </form>
-    </div>
+  <h3>Submit a Complaint</h3>
+  <form id="complaintForm">
+    <input type="text" id="title" placeholder="Complaint Title" required>
+    <textarea id="desc" rows="5" placeholder="Describe your issue..." required></textarea>
+    <select id="category" required>
+      <option value="" disabled selected>Category</option>
+      <option>Room Issue</option>
+      <option>Mess / Food</option>
+      <option>Maintenance</option>
+      <option>Other</option>
+    </select>
+
+    <!-- 👇 New: Image Upload -->
+    <label for="imageUpload" style="font-weight:500; margin-top:1rem; display:block;">Attach Image (optional)</label>
+    <input type="file" id="imageUpload" accept="image/*" style="margin-bottom:1rem;">
+    <div id="imagePreview" style="margin-bottom:1rem;"></div>
+
+    <button type="submit">Submit Complaint</button>
+  </form>
+</div>
+
 
     <div class="recent-complaints">
       <h3>Recent Complaints</h3>
@@ -99,6 +152,38 @@
     </div>
   </div>
 
+  <!-- 👇 NEW CONTACT SECTION -->
+  <section class="contact-section">
+    <h3>Contact Warden & Staff 📞</h3>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h4>🏢 Warden</h4>
+        <p><b>Name:</b> Mr. Rajesh Sharma<br>
+        <b>Phone:</b> +91 98765 12345<br>
+        <b>Email:</b> warden@fixmyhostel.com<br>
+        <b>Available:</b> 9 AM – 8 PM</p>
+      </div>
+      <div class="contact-card">
+        <h4>⚡ Electrician</h4>
+        <p><b>Name:</b> Sunil Kumar<br>
+        <b>Phone:</b> +91 99999 54321<br>
+        <b>Available:</b> 9 AM – 6 PM</p>
+      </div>
+      <div class="contact-card">
+        <h4>🚰 Plumber</h4>
+        <p><b>Name:</b> Anil Mehta<br>
+        <b>Phone:</b> +91 88888 43210<br>
+        <b>Available:</b> 10 AM – 5 PM</p>
+      </div>
+      <div class="contact-card">
+        <h4>🍛 Mess Supervisor</h4>
+        <p><b>Name:</b> Ritu Verma<br>
+        <b>Phone:</b> +91 77777 23456<br>
+        <b>Email:</b> mess@fixmyhostel.com</p>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-inline">
       <p>© 2025 FixMyHostel — Making Hostels Smarter</p>
@@ -109,26 +194,105 @@
       </p>
     </div>
   </footer>
-<script>
-document.addEventListener('DOMContentLoaded', loadComplaints);
-localStorage.clear(); // just for demo — remove later
 
-document.querySelector('form').addEventListener('submit', function (e) {
+  <script>
+    document.addEventListener('DOMContentLoaded', loadComplaints);
+    localStorage.clear(); // demo only, remove later
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const title = this.querySelector('input').value.trim();
+      const description = this.querySelector('textarea').value.trim();
+      const category = this.querySelector('select').value;
+
+      if (!title || !description || !category) {
+        alert('⚠️ Please fill in all fields!');
+        return;
+      }
+
+      const priority = getPriorityLevel(title + " " + description);
+      const complaintID = "CMP-" + Math.floor(100000 + Math.random() * 900000);
+
+      const newComplaint = {
+        id: Date.now(),
+        complaintID,
+        title,
+        description,
+        category,
+        priority,
+        date: new Date().toLocaleDateString('en-IN'),
+        status: 'Pending'
+      };
+
+      const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+      complaints.unshift(newComplaint);
+      localStorage.setItem('complaints', JSON.stringify(complaints));
+
+      alert(`✅ Complaint submitted!\nComplaint ID: ${complaintID}\nPriority: ${priority}`);
+      this.reset();
+      loadComplaints();
+    });
+
+    function getPriorityLevel(text) {
+      text = text.toLowerCase();
+      const highKeywords = ['fire', 'burning', 'smoke', 'gas leak', 'electric', 'shock', 'short circuit', 'urgent'];
+      const mediumKeywords = ['food', 'wifi', 'cleaning', 'dirty', 'slow', 'noise'];
+      const normalKeywords = ['suggestion', 'feedback', 'request'];
+      if (highKeywords.some(k => text.includes(k))) return 'High';
+      if (mediumKeywords.some(k => text.includes(k))) return 'Medium';
+      if (normalKeywords.some(k => text.includes(k))) return 'Normal';
+      return 'Medium';
+    }
+
+    function loadComplaints() {
+      const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
+      const container = document.querySelector('.recent-complaints');
+      if (complaints.length > 0) {
+        container.innerHTML = `<h3>Recent Complaints</h3>` +
+          complaints.map(c => `
+            <div class="complaint-card">
+              <h4>${c.title}</h4>
+              <p>Category: ${c.category}</p>
+              <p>Date: ${c.date}</p>
+              <p><strong>ID:</strong> ${c.complaintID}</p>
+              <p><strong>Priority:</strong> <span class="priority ${c.priority.toLowerCase()}">${c.priority}</span></p>
+              <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
+            </div>
+          `).join('');
+      }
+    }
+
+    // Image preview
+const imageInput = document.getElementById('imageUpload');
+const imagePreview = document.getElementById('imagePreview');
+let uploadedImage = "";
+
+imageInput.addEventListener('change', function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      uploadedImage = e.target.result;
+      imagePreview.innerHTML = `<img src="${uploadedImage}" style="width:100%; max-width:200px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);">`;
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Modify your existing submit listener
+document.getElementById('complaintForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  const title = this.querySelector('input').value.trim();
-  const description = this.querySelector('textarea').value.trim();
-  const category = this.querySelector('select').value;
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('desc').value.trim();
+  const category = document.getElementById('category').value;
 
   if (!title || !description || !category) {
     alert('⚠️ Please fill in all fields!');
     return;
   }
 
-  // 👇 Auto flag priority
   const priority = getPriorityLevel(title + " " + description);
-
-  // 👇 Generate readable ID for user
   const complaintID = "CMP-" + Math.floor(100000 + Math.random() * 900000);
 
   const newComplaint = {
@@ -138,6 +302,7 @@ document.querySelector('form').addEventListener('submit', function (e) {
     description,
     category,
     priority,
+    image: uploadedImage || "",
     date: new Date().toLocaleDateString('en-IN'),
     status: 'Pending'
   };
@@ -148,29 +313,12 @@ document.querySelector('form').addEventListener('submit', function (e) {
 
   alert(`✅ Complaint submitted!\nComplaint ID: ${complaintID}\nPriority: ${priority}`);
   this.reset();
+  uploadedImage = "";
+  imagePreview.innerHTML = "";
   loadComplaints();
 });
 
-function getPriorityLevel(text) {
-  text = text.toLowerCase();
-
-  const highKeywords = [
-    'fire', 'burning', 'smoke', 'gas leak', 'leak', 'electric', 'shock', 
-    'broken wire', 'water flooding', 'short circuit', 'danger', 'urgent', 'emergency'
-  ];
-  const mediumKeywords = [
-    'food', 'mess', 'wifi', 'internet', 'cleaning', 'dirty', 'slow', 'noise'
-  ];
-  const normalKeywords = [
-    'suggestion', 'request', 'improve', 'feedback', 'help'
-  ];
-
-  if (highKeywords.some(k => text.includes(k))) return 'High';
-  if (mediumKeywords.some(k => text.includes(k))) return 'Medium';
-  if (normalKeywords.some(k => text.includes(k))) return 'Normal';
-  return 'Medium';
-}
-
+// Update your loadComplaints() function to display image
 function loadComplaints() {
   const complaints = JSON.parse(localStorage.getItem('complaints') || '[]');
   const container = document.querySelector('.recent-complaints');
@@ -182,19 +330,16 @@ function loadComplaints() {
           <h4>${c.title}</h4>
           <p>Category: ${c.category}</p>
           <p>Date: ${c.date}</p>
+          ${c.image ? `<img src="${c.image}" style="width:100%;max-width:200px;border-radius:6px;margin-top:6px;">` : ""}
           <p><strong>ID:</strong> ${c.complaintID}</p>
-          <p><strong>Priority:</strong> 
-            <span class="priority ${c.priority.toLowerCase()}">${c.priority}</span>
-          </p>
+          <p><strong>Priority:</strong> <span class="priority ${c.priority.toLowerCase()}">${c.priority}</span></p>
           <p>Status: <span class="status status-${c.status.toLowerCase()}">${c.status}</span></p>
         </div>
       `).join('');
   }
-
-  
 }
 
-</script>
+  </script>
 
 </body>
 </html>
